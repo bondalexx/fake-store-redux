@@ -1,8 +1,7 @@
 import React, { useEffect, useState,useMemo } from "react";
-import {useHttp} from '../../hooks/http.hook';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchProducts } from "../../actions";
+import { fetchProducts } from "./prodcutsSlice";
 import Product from "../product/Product";
 
 import './productList.css';
@@ -10,7 +9,6 @@ import './productList.css';
 const ProductList = ({ activeFilter }) => {
     const products = useSelector(state => state.products)
     const dispatch = useDispatch();
-    const { request } = useHttp();
     const [filteredProducts, setFilteredProducts] = useState([]);
   
     const filtered = useMemo(() => {
@@ -18,14 +16,14 @@ const ProductList = ({ activeFilter }) => {
     }, [activeFilter, products]);
   
     useEffect(() => {
-      dispatch(fetchProducts(request));
+      dispatch(fetchProducts());
     }, []);
   
     useEffect(() => {
       setFilteredProducts(filtered);
     }, [activeFilter, products]);
-  
-    console.log(activeFilter)
+
+    console.log(filtered)
 
     const elements = filteredProducts.map(product => {
       return (

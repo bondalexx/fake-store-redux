@@ -1,6 +1,6 @@
-import { configureStore , combineReducers} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
-import products from '../reducers/products';
+import products from '../components/productList/prodcutsSlice';
 
 const stringMiddleware = () => (next) => (action) => {
     if (typeof action === 'string') {
